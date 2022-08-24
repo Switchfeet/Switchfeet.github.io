@@ -8,6 +8,6 @@ categories: jekyll update
 
 ---
 
-This is a personal blog called "Switchfeet's tech note." Is is build through jekyll and theme of the blog is minimal-mistakes.
+This is a personal blog called "Switchfeet's tech note." It is built through jekyll and theme of the blog is minimal-mistakes.
 
 Let's get it started!
