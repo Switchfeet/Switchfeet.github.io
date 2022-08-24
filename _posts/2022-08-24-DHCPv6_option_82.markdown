@@ -7,16 +7,37 @@ date:   2022-08-24 12:51:42 +0800
 categories: DHCPv6
 
 ---
+ ***What is SOL_MAX_RT*** 
+
 [RFC 8415](https://www.rfc-editor.org/rfc/rfc8415.html) has defined the DHCPv6 SOL_MAX_RT option, and option-code is 82.
 
-When doing DHCPv6 handshake, if a client includes an Option Request option (ORO) to request the SOL_MAX_RT option and gets a valid SOL_MAX_RT option from the server, this value of SOL_MAX_RT will replace the default value of the client.
+During DHCPv6 handshake, if a client includes an Option Request option (ORO) to request the SOL_MAX_RT option and gets a valid SOL_MAX_RT option from the server, this value of SOL_MAX_RT will replace the default value of the client.
+
+Then, if a client sends a solicit message and fails to get a response from the server after some time due to router power failure or outage, the client will retransmit the solicit message after a backoff timer expiry. And the backoff timer of next retransmission will be calculated according to the previous one until it reaches the value of SOL_MAX_RT. After that, the backoff timer will be calculated base on SOL_MAX_RT.
 
 One use for the SOL_MAX_RT option is to set a higher value for SOL_MAX_RT; this reduces the Solicit traffic from a client that has not received a response to its Solicit messages.
 
-If a client sends a solicit message and fails to get a response from the server after some time due to router power failure or outage, the client will retransmit the solicit message after a backoff timer expired. And the next retransmission time of solicit message will be calculated depending on the previous one until it reaches the value of SOL_MAX_RT.
+---
+ ***How to calculate SOL_MAX_RT*** 
+
+   RT for the first message transmission is based on IRT and a random number RAND which is chosen with a uniform distribution between -0.1 and +0.1：
+
+      RT = IRT + RAND*IRT (The first retransmission will be 1 +/- 0.1)
+
+   RT for each subsequent message transmission is based on the previous
+   value of RT:
+
+      RT = 2*RTprev + RAND*RTprev
+
+   If the RT reaches MRT(i.e. SOL_MAX_RT), then:
+
+      if (RT > MRT)
+         RT = MRT + RAND*MRT
+
+---
+
 
 ![dhcp6.solmax-rt](/assets/images/dhcp6.solmax-rt.jpg)
-
 
 ---
 
