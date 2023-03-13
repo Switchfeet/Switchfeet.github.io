@@ -11,7 +11,7 @@ categories: DHCPv6
 
 [RFC 8415](https://www.rfc-editor.org/rfc/rfc8415.html) has defined the DHCPv6 SOL_MAX_RT option, and option-code is 82.
 
-During DHCPv6 handshake, if a client includes an Option Request option (ORO) to request the SOL_MAX_RT option and gets a valid SOL_MAX_RT option from the server, this value of SOL_MAX_RT will replace the default value of the client.
+During DHCPv6 handshake, if a client includes an Option Request option (ORO) to request the SOL_MAX_RT option and gets a valid SOL_MAX_RT option from the server, this value of SOL_MAX_RT will replace the default value predefined in the client.
 
 Then, if a client sends a solicit message and fails to get a response from the server after some time due to router power failure or outage, the client will retransmit the solicit message after a backoff timer expiry. And the backoff timer of next retransmission will be calculated according to the previous one until it reaches the value of SOL_MAX_RT. After that, the backoff timer will be calculated base on SOL_MAX_RT.
 
@@ -20,9 +20,11 @@ One use for the SOL_MAX_RT option is to set a higher value for SOL_MAX_RT; this 
 ---
  ***How to calculate SOL_MAX_RT*** 
 
-   RT for the first message transmission is based on IRT and a random number RAND which is chosen with a uniform distribution between -0.1 and +0.1：
+   RT for the first message transmission is based on IRT (i.e. 1 sec) and a random number RAND which is chosen with a uniform distribution between -0.1 and +0.1：
 
       RT = IRT + RAND*IRT (The first retransmission will be 1 +/- 0.1)
+
+   So the very first RT will be within 0.9 ~ 1.1 sec
 
    RT for each subsequent message transmission is based on the previous
    value of RT:
@@ -35,10 +37,28 @@ One use for the SOL_MAX_RT option is to set a higher value for SOL_MAX_RT; this 
          RT = MRT + RAND*MRT
 
 ---
+***Verification SOL_MAX_RT on isc-dhcpv6 server***
 
+   1. Configure SOL_MAX_RT by setting the option dhcp6.solmax-rt, e.g. 100 so that the backoff time of SOL_MAX_RT will be ranging from 90 to 110 secs.
 
-![dhcp6.solmax-rt](/assets/images/dhcp6.solmax-rt.jpg)
+   ![dhcp6.solmax-rt](/assets/images/dhcp6.solmax-rt.jpg)
 
+   2. Save the configuration and restart isc-dhcpv6 server via /etc/init.d/dhcpd6 restart
+
+   3. Start capturing packets on the WAN side of the DHCPv6 client. There should be DHCPv6 handshake bewteen client and server (i.e. SARR).
+
+      From Solicit message sent by client, we can see the ORO list including SOL_MAX_RT(82).
+
+   ![dhcp6.solmax-rt](/assets/images/dhcp6.solmax-rt-solicit.jpg)
+  
+   4. Server responds with SOL_MAX_RT(82) which is configured as 100 in the step 1.(equals to 64 in base 16)
+
+   ![dhcp6.solmax-rt](/assets/images/dhcp6.solmax-rt-advertise.jpg)
+
+   5. Stop isc-dhcpv6 server so that it will not to reply to any request from client. Eventually, the backoff time of Solicit will be ranging from 90 to 110 secs.
+
+   ![dhcp6.solmax-rt](/assets/images/dhcp6.solmax-rt-backoff.jpg)
+   
 ---
 
 References：[RFC 3315](https://www.rfc-editor.org/rfc/rfc3315.html) , [RFC 8415](https://www.rfc-editor.org/rfc/rfc8415.html) , [RFC 7083](https://www.rfc-editor.org/rfc/rfc7083.html)
