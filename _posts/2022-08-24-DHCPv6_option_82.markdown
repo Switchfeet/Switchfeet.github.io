@@ -1,6 +1,6 @@
 ---
 
-title:  "DHCPv6 SOL_MAX_RT Option"
+title:  "DHCPv6 SOL_MAX_RT (82) Option"
 
 date:   2022-08-24 12:51:42 +0800
 
