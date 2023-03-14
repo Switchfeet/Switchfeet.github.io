@@ -42,21 +42,21 @@ One use for the SOL_MAX_RT option is to set a higher value for SOL_MAX_RT; this 
 
 1、Configure SOL_MAX_RT by setting the option dhcp6.solmax-rt, e.g. 100 so that the backoff time of SOL_MAX_RT will be ranging from 90 to 110 secs.
 
-![dhcp6.solmax-rt](/assets/images/dhcp6.solmax-rt.jpg)
+![dhcp6.solmax-rt](/assets/images/dhcpv6_option82/dhcp6.solmax-rt.jpg)
 
 2、Save the configuration and restart isc-dhcpv6 server via /etc/init.d/dhcpd6 restart
 
 3、Start capturing packets on the WAN side of the DHCPv6 client. There should be DHCPv6 handshake bewteen client and server (i.e. SARR). From Solicit message sent by client, we can see the ORO list including SOL_MAX_RT(82).
 
-![dhcp6.solmax-rt](/assets/images/dhcp6.solmax-rt-solicit.jpg)
+![dhcp6.solmax-rt](/assets/images/dhcpv6_option82/dhcp6.solmax-rt-solicit.jpg)
 
 4、Server responds with SOL_MAX_RT(82) which is configured as 100 in the step 1.(equals to 64 in base 16)
 
-![dhcp6.solmax-rt](/assets/images/dhcp6.solmax-rt-advertise.jpg)
+![dhcp6.solmax-rt](/assets/images/dhcpv6_option82/dhcp6.solmax-rt-advertise.jpg)
 
 5、Stop isc-dhcpv6 server so that it will not to reply to any request from client. Eventually, the backoff time of Solicit will be ranging from 90 to 110 secs.
 
-![dhcp6.solmax-rt](/assets/images/dhcp6.solmax-rt-backoff.jpg)
+![dhcp6.solmax-rt](/assets/images/dhcpv6_option82/dhcp6.solmax-rt-backoff.jpg)
 
 ---
 
