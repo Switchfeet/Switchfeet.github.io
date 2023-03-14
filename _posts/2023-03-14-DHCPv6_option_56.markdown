@@ -7,7 +7,7 @@ date:   2022-03-14 13:17:42 +0800
 categories: DHCPv6
 
 ---
- ***NTP Server (56) Option*** 
+ ***DHCPv6 NTP Server (56) Option*** 
 
 [RFC 5980](https://www.rfc-editor.org/rfc/rfc5980.html) RFC 5980定義了NTP Server Option for DHCPv6(option 56)，以及3種指定NTP server的suboption，分別是。
 
