@@ -38,7 +38,7 @@ One use for the SOL_MAX_RT option is to set a higher value for SOL_MAX_RT; this 
 
 ---
 
-***Verification SOL_MAX_RT on isc-dhcpv6 server***
+***Verification of SOL_MAX_RT on isc-dhcpv6 server***
 
 1、Configure SOL_MAX_RT by setting the option dhcp6.solmax-rt, e.g. 100 so that the backoff time of SOL_MAX_RT will be ranging from 90 to 110 secs.
 
