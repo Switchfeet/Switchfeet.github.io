@@ -1,6 +1,6 @@
 ---
 
-title:  "DHCPv6 SOL_MAX_RT (95) Option"
+title:  "DHCPv6 S46 MAP-T Container (95) Option"
 
 date:   2023-03-14 16:51:42 +0800
 
@@ -11,7 +11,7 @@ categories: DHCPv6
 
 其制定了IPv4位址轉換IPv6位址所需要的參數；包括BMR、DMR、Rule IPv4 prefix、Rule IPv6 prefix、Embedded Address (EA) bits等。
 
-我們可以利用http://map46.cisco.com/MAP.php網址客製化DHCPv6 Option 95，並產生符合ISC DHCPv6 Server的Config。
+我們可以利用 http://map46.cisco.com/MAP.php 網址客製化DHCPv6 Option 95，並產生符合ISC DHCPv6 Server的Config。
 
 ![dhcp6.option95](/assets/images/dhcpv6_option95/dhcp6.option95-cisco.jpg)
 
