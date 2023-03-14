@@ -1,0 +1,69 @@
+---
+
+title:  "DHCPv6 NTP Server (56) Option"
+
+date:   2022-03-14 13:17:42 +0800
+
+categories: DHCPv6
+
+---
+ ***NTP Server (56) Option*** 
+
+[RFC 5980](https://www.rfc-editor.org/rfc/rfc5980.html) RFC 5980定義了NTP Server Option for DHCPv6(option 56)，以及3種指定NTP server的suboption，分別是。
+
+suboption(code 1)：指定NTP Server IPv6 address，ex. 2001:608:0:dff::2
+suboption(code 2)：指定NTP Server Multicast IPv6 address
+suboption(code 3)：指定NTP Server的FQDN域名，ex. ntp6.space.net
+
+![dhcp6.ntp](/assets/images/rfc5980_dhcpv6_ntp_option.jpg)
+
+這次會針對suboption(code 1)、suboption(code 3)，進行實作。
+
+---
+ ***修改dhcp6d.conf***
+ 1、在subnet6外面定義一個NTP Server的DATA STRING，option code = 56
+
+![dhcp6.ntp](/assets/images/isc_dhcpv6_ntp_option.jpg)
+
+2、實作suboption(code 1)：指定NTP Server IPv6 address，ex. 2606:4700:f1::123
+suboption需要填入三個資料：
+ - suboption code (即00:01)
+ - NTP Server IPv6 address的byte長度
+ - NTP Server IPv6 address的HEX表示式
+
+	NTP Server完整128bits的IPv6 address表示式：
+2606:4700:00f1:0000:0000:0000:0000:0123，進一步以”冒號”分隔每個byte，即26:06:47:00:00:f1:00:00:00:00:00:00:00:00:01:23，總共有16 bytes；長度表示式為00:10
+
+再加上suboption code，組合成00:01:00:10:26:06:47:00:00:f1:00:00:00:00:00:00:00:00:01:23，填到subnet6內的option dhcp6.ntp-servers。
+
+![dhcp6.ntp](/assets/images/isc_dhcpv6_ntp_option_ipv6.jpg)
+
+查看DHCPv6 Server reply：
+
+![dhcp6.ntp](/assets/images/isc_dhcpv6_ntp_option_ipv6-reply.jpg)
+
+3、實作suboption(code 3)：指定NTP Server的FQDN域名，ex. ntp6.space.net
+suboption需要填入三個資料：
+      suboption code (即00:03)
+      NTP Server FQDN域名的byte長度
+      NTP Server FQDN域名的HEX表示式
+
+以nslookup取得NTP Server FQDN域名的HEX表示式：
+
+![dhcp6.ntp](/assets/images/FQDN_nslookup.jpg)
+
+組合成00:03:00:10:04:6e:74:70:36:05:73:70:61:63:65:03:6e:65:74:00，填到subnet6內的option dhcp6.ntp-servers。
+
+![dhcp6.ntp](/assets/images/isc_dhcpv6_ntp_option_fqdn.jpg)
+
+查看DHCPv6 Server reply：
+
+![dhcp6.ntp](/assets/images/isc_dhcpv6_ntp_option_fqdn-reply.jpg)
+
+4、將兩個subotion組合：
+
+![dhcp6.ntp](/assets/images/isc_dhcpv6_ntp_option_ipv6_fqdn-reply.jpg)
+
+---
+
+References：[RFC 5980](https://www.rfc-editor.org/rfc/rfc5980.html)
