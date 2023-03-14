@@ -9,11 +9,11 @@ categories: DHCPv6
 ---
  ***DHCPv6 NTP Server (56) Option*** 
 
-[RFC 5980](https://www.rfc-editor.org/rfc/rfc5980.html) RFC 5980定義了NTP Server Option for DHCPv6(option 56)，以及3種指定NTP server的suboption，分別是。
+[RFC 5980](https://www.rfc-editor.org/rfc/rfc5980.html) RFC 5980定義了NTP Server Option for DHCPv6(option 56)，以及3種指定NTP server的suboption，分別是：
 
-suboption(code 1)：指定NTP Server IPv6 address，ex. 2001:608:0:dff::2
+suboption(code 1)：指定NTP Server IPv6 address，e.g. 2001:608:0:dff::2
 suboption(code 2)：指定NTP Server Multicast IPv6 address
-suboption(code 3)：指定NTP Server的FQDN域名，ex. ntp6.space.net
+suboption(code 3)：指定NTP Server的FQDN域名，e.g. ntp6.space.net
 
 ![dhcp6.ntp](/assets/images/rfc5980_dhcpv6_ntp_option.jpg)
 
@@ -26,7 +26,7 @@ suboption(code 3)：指定NTP Server的FQDN域名，ex. ntp6.space.net
 
 ![dhcp6.ntp](/assets/images/isc_dhcpv6_ntp_option.jpg)
 
-2、實作suboption(code 1)：指定NTP Server IPv6 address，ex. 2606:4700:f1::123
+2、實作suboption(code 1)：指定NTP Server IPv6 address，e.g. 2606:4700:f1::123
 suboption需要填入三個資料：
  - suboption code (即00:01)
  - NTP Server IPv6 address的byte長度
@@ -43,7 +43,7 @@ suboption需要填入三個資料：
 
 ![dhcp6.ntp](/assets/images/isc_dhcpv6_ntp_option_ipv6-reply.jpg)
 
-3、實作suboption(code 3)：指定NTP Server的FQDN域名，ex. ntp6.space.net
+3、實作suboption(code 3)：指定NTP Server的FQDN域名，e.g. **ntp6.space.net**
 suboption需要填入三個資料：
       suboption code (即00:03)
       NTP Server FQDN域名的byte長度
