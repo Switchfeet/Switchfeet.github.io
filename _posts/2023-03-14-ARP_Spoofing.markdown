@@ -20,6 +20,7 @@ Client之後會更新ARP Table：
 ---
 
 ***ARP Spoofing***
+
 使用攻擊主機製造假的ARP封包，目的是發送不正確的Gateway MAC位址給Client並放入封包內，導致封包無法傳送到真的Gateway連到Internet。假封包的source ip設定為192.168.1.1，source MAC是攻擊主機的MAC位址；destination ip是192.168.1.223。
 
 ![arp](/assets/images/arp/output/arp-spoofing.jpg)
