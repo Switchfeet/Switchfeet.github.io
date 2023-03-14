@@ -22,11 +22,11 @@ suboption(code 3)：指定NTP Server的FQDN域名，ex. ntp6.space.net
 ---
  ***修改dhcp6d.conf***
  
- 1. 在subnet6外面定義一個NTP Server的DATA STRING，option code = 56
+1、在subnet6外面定義一個NTP Server的DATA STRING，option code = 56
 
 ![dhcp6.ntp](/assets/images/isc_dhcpv6_ntp_option.jpg)
 
- 2. 實作suboption(code 1)：指定NTP Server IPv6 address，ex. 2606:4700:f1::123
+2、實作suboption(code 1)：指定NTP Server IPv6 address，ex. 2606:4700:f1::123
 suboption需要填入三個資料：
  - suboption code (即00:01)
  - NTP Server IPv6 address的byte長度
@@ -43,7 +43,7 @@ suboption需要填入三個資料：
 
 ![dhcp6.ntp](/assets/images/isc_dhcpv6_ntp_option_ipv6-reply.jpg)
 
- 3. 實作suboption(code 3)：指定NTP Server的FQDN域名，ex. ntp6.space.net
+3、實作suboption(code 3)：指定NTP Server的FQDN域名，ex. ntp6.space.net
 suboption需要填入三個資料：
       suboption code (即00:03)
       NTP Server FQDN域名的byte長度
