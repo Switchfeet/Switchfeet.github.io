@@ -9,7 +9,7 @@ categories: DHCPv6
 ---
  ***DHCPv6 Option 95(S46 MAP-T Container Option)*** 
 
-其制定了IPv4位址轉換IPv6位址所需要的參數；包括BMR、DMR、Rule IPv4 prefix、Rule IPv6 prefix、Embedded Address (EA) bits等。
+其制定了IPv4位址轉換IPv6位址所需要的參數；包括DMR、Rule IPv4 prefix、Rule IPv6 prefix、Embedded Address (EA) bits等。
 
 我們可以利用 http://map46.cisco.com/MAP.php 網址客製化DHCPv6 Option 95，並產生符合ISC DHCPv6 Server的Config。
 
