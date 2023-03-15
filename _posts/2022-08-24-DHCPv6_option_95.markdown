@@ -24,17 +24,17 @@ categories: DHCPv6
 
 ![dhcp6.option95](/assets/images/dhcpv6_option95/output/dhcp6.option95-isc.jpg)
 
-2、查看MAPT-enabled的DUT在WAN端所取得的DHCPv6 Option 95內容。
+2、查看MAPT-enabled的Router在WAN端所取得的DHCPv6 Option 95內容。
 
 ![dhcp6.option95](/assets/images/dhcpv6_option95/output/dhcp6.option95-WAN.jpg)
 
-3、查看DUT取得Option 95之後所生成的MAPT rules，包括MAP IPv6位址：2001:172:16:101e::c633:6401:e /128，DMR為64:ff9b:1:5:: /64
+3、查看Router取得Option 95之後所生成的MAPT rules，包括MAP IPv6位址：2001:172:16:101e::c633:6401:e /128，DMR為64:ff9b:1:5:: /64
 
 ![dhcp6.option95](/assets/images/dhcpv6_option95/output/dhcp6.option95-dut.jpg)
 
-4、從LAN PC ping 8.8.8.8，WAN端抓包查看DUT是否有將IPv4封包轉化成IPv6:
+4、從LAN PC ping 8.8.8.8，WAN端抓包查看Router是否有將IPv4封包轉化成IPv6:
 
-=> 可以看到WAN端Source IPv6 address為DUT的MAPT IPv6 address；而Destination IPv6 address為自定義的DMR prefix + 8.8.8.8合併而成。
+=> 可以看到WAN端Source IPv6 address為Router的MAPT IPv6 address；而Destination IPv6 address為自定義的DMR prefix + 8.8.8.8合併而成。
 
 ![dhcp6.option95](/assets/images/dhcpv6_option95/output/dhcp6.option95-mapt.jpg)
 
