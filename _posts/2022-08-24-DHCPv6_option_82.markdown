@@ -54,7 +54,7 @@ One use for the SOL_MAX_RT option is to set a higher value for SOL_MAX_RT; this 
 
 ![dhcp6.solmax-rt](/assets/images/dhcpv6_option82/output/dhcp6.solmax-rt-advertise.jpg)
 
-5、Stop isc-dhcpv6 server so that it will not to reply to any request from client. Eventually, the backoff time of Solicit will be ranging from 90 to 110 secs.
+5、Stop isc-dhcpv6 server so that it will not reply to any request from client. Eventually, the backoff time of Solicit will be ranging from 90 to 110 secs.
 
 ![dhcp6.solmax-rt](/assets/images/dhcpv6_option82/output/dhcp6.solmax-rt-backoff.jpg)
 
