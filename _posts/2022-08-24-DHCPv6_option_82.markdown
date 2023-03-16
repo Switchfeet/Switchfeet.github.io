@@ -46,7 +46,7 @@ One use for the SOL_MAX_RT option is to set a higher value for SOL_MAX_RT; this 
 
 2、Save the configuration and restart isc-dhcpv6 server by using command: /etc/init.d/dhcpd6 restart
 
-3、Start capturing packets on the WAN side of the DHCPv6 client. There should be DHCPv6 handshake bewteen client and server (i.e. SARR). From Solicit message sent by client, we can see the ORO list including SOL_MAX_RT(82).
+3、Start capturing packets on the WAN side of the DHCPv6 client. There should be DHCPv6 handshake bewteen client and server (i.e. SARR). From the Solicit message sent by client, we can see the ORO list including SOL_MAX_RT(82).
 
 ![dhcp6.solmax-rt](/assets/images/dhcpv6_option82/output/dhcp6.solmax-rt-solicit.jpg)
 
